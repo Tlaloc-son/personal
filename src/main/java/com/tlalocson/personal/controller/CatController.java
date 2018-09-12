@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.gson.Gson;
 import com.tlalocson.personal.entity.RolEntity;
 import com.tlalocson.personal.repository.RolMapper;
 
@@ -27,7 +28,9 @@ public class CatController {
 	
 	@RequestMapping(value = "/roles", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<String> getRoles() {
+		Gson gson = new Gson();
 		List<RolEntity> roles = rolMapper.getRoles();
-		return new ResponseEntity<>(roles.toString(), HttpStatus.OK);
+		String jsonResponse = gson.toJson(roles);
+		return new ResponseEntity<>(jsonResponse, HttpStatus.OK);
 	}
 }

@@ -16,12 +16,12 @@ import com.tlalocson.personal.service.impl.CustomUserDetailsService;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
-	@Qualifier("usuarioService")
-	private CustomUserDetailsService usuarioService;
+	@Qualifier("loginUserService")
+	private CustomUserDetailsService loginUserService;
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder authManager) throws Exception{
-		authManager.userDetailsService(usuarioService).passwordEncoder(new BCryptPasswordEncoder());
+		authManager.userDetailsService(loginUserService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	@Override
